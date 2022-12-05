@@ -1,5 +1,6 @@
 package com.cydeo.dto;
 import com.cydeo.enums.Status;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,8 +38,12 @@ public class ProjectDTO {
     private String projectDetail;
 
     private Status projectStatus;
-
+    // we dont give this info in the UI Part, it is coming from DB to UI thats why it is READ ONLY
+    //We want user to be able to send password, but in here we don't want user to send anything
+    // this time we want to send task counts to user so that they can see.
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private int completeTaskCounts;
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private int unfinishedTaskCounts;
 
     public ProjectDTO(String projectName, String projectCode, UserDTO assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {

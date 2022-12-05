@@ -43,7 +43,7 @@ public class UserDTO {
     private String passWord;
 
     @NotNull
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // post not read
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // post,  not read
     private String confirmPassWord;
 
     private boolean enabled;
