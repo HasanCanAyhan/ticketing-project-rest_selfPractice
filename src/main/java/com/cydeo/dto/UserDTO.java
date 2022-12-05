@@ -1,6 +1,8 @@
 package com.cydeo.dto;
 
 import com.cydeo.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -36,9 +38,12 @@ public class UserDTO {
 
     @NotBlank
     @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}")
+    //@JsonIgnore while post and get you ignore it
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // post not read
     private String passWord;
 
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // post not read
     private String confirmPassWord;
 
     private boolean enabled;
