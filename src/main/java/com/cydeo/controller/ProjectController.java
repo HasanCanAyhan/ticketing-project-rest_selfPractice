@@ -38,7 +38,8 @@ public class ProjectController {
 
         projectService.save(projectDTO);
 
-        return ResponseEntity.ok(new ResponseWrapper("Project created",HttpStatus.CREATED));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper("Project is successfully created",HttpStatus.CREATED));
+
     }
 
     @PutMapping
@@ -46,7 +47,7 @@ public class ProjectController {
 
         projectService.update(projectDTO);
 
-        return ResponseEntity.ok(new ResponseWrapper("Project updated",HttpStatus.CREATED));
+        return ResponseEntity.ok(new ResponseWrapper("Project is successfully updated", HttpStatus.OK));
 
     }
 
@@ -58,21 +59,21 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/getProjectByManager")
+
+    @GetMapping("/manager/project-status")
     public ResponseEntity<ResponseWrapper> getProjectByManager(){
 
-        return ResponseEntity.ok(new ResponseWrapper("Project retrieved",projectService.listAllProjectDetails(), HttpStatus.OK));
+        return ResponseEntity.ok(new ResponseWrapper("Projects are successfully retrieved",projectService.listAllProjectDetails(), HttpStatus.OK));
 
     }
 
 
-    @GetMapping("/assignedManager/{username}")
-    public ResponseEntity<ResponseWrapper> managerCompleteProjects(@PathVariable String username){
+    @PutMapping("/manager/complete/{projectCode}")
+    public ResponseEntity<ResponseWrapper> managerCompleteProjects(@PathVariable("projectCode") String projectCode){
 
-        UserDTO userDTO = userService.findByUserName(username);
+        projectService.complete(projectCode);
 
-        return ResponseEntity.ok(new ResponseWrapper("Project retrieved",projectService.listAllNonCompletedByAssignedManager(userDTO), HttpStatus.OK));
-
+        return ResponseEntity.ok(new ResponseWrapper("Project is successfully completed", HttpStatus.OK));
     }
 
 }
