@@ -48,7 +48,7 @@ public class KeycloakServiceImpl implements KeycloakService {
 
         Keycloak keycloak = getKeycloakInstance();
 
-        RealmResource realmResource = keycloak.realm(keycloakProperties.getRealm());//cydeo-dev in the application.properties
+        RealmResource realmResource = keycloak.realm(keycloakProperties.getRealm());//cydeo-dev realm in the application.properties
         UsersResource usersResource = realmResource.users();
 
         // Create Keycloak user
@@ -58,7 +58,7 @@ public class KeycloakServiceImpl implements KeycloakService {
         ClientRepresentation appClient = realmResource.clients()
                 .findByClientId(keycloakProperties.getClientId()).get(0);
 
-        RoleRepresentation userClientRole = realmResource.clients().get(appClient.getId()) //
+        RoleRepresentation userClientRole = realmResource.clients().get(appClient.getId()) // to assign role , if it matches in the Keycloak
                 .roles().get(userDTO.getRole().getDescription()).toRepresentation();
 
         realmResource.users().get(userId).roles().clientLevel(appClient.getId())
