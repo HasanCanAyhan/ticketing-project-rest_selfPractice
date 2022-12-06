@@ -50,7 +50,7 @@ public class SwaggerConfig {
         OAuthFlow flow = createAuthorizationCodeFlow();
 
         return new OAuthFlows()
-                .authorizationCode(flow);
+                .authorizationCode(flow);//we use swagger -swagger is UI Part
     }
 
     private OAuthFlow createAuthorizationCodeFlow() {
