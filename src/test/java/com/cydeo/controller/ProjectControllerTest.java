@@ -96,6 +96,7 @@ class ProjectControllerTest {
                 .andExpect(jsonPath("$.data[0].projectCode").exists())
                 .andExpect(jsonPath("$.data[0].assignedManager.userName").exists()) //checking field of userName
                 .andExpect(jsonPath("$.data[0].assignedManager.userName").isNotEmpty()) // checking value of username is not empty
+                .andExpect(jsonPath("$.data[0].assignedManager.userName").isString()) // checking value of username is not empty
                 .andExpect(jsonPath("$.data[0].assignedManager.userName").value("ozzy"));
 
     }
