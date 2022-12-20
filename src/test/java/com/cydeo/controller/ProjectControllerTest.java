@@ -110,6 +110,7 @@ class ProjectControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(toJsonString(project)))
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Project is successfully created"));
 
 
